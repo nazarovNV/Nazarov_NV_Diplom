@@ -1,6 +1,13 @@
+from time import sleep
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+pytest_plugins = [
+    "fixtures.elements_collector",
+    "fixtures.scripts_collector"
+]
 
 
 @pytest.fixture()
@@ -11,3 +18,6 @@ def driver():
     my_driver.implicitly_wait(10)
     yield my_driver
     my_driver.quit()
+
+
+
