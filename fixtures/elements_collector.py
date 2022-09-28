@@ -37,9 +37,14 @@ def element_chose_address_input_field_submit(element):
 
 @pytest.fixture()
 def go_to_main_page(url):
-    return url("https://dostavka-stage.magnit.ru/")
+    return url("https://dostavka.magnit.ru/")
 
 
 @pytest.fixture()
 def element_search_input(element):
     return element(By.CLASS_NAME, "m-input-text__input")
+
+
+@pytest.fixture()
+def element_user_address(element):
+    return element(By.CLASS_NAME, "select-address-header--text")

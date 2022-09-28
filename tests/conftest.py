@@ -1,5 +1,5 @@
 from time import sleep
-
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -18,6 +18,3 @@ def driver():
     my_driver.implicitly_wait(10)
     yield my_driver
     my_driver.quit()
-
-
-
