@@ -390,7 +390,7 @@ import allure
 
 @allure.suite("Баннеры акций")
 @allure.title("Проверка работы карусели больших банеров и их отображения")
-def test_link_return(driver):
+def test_big_banners_carousel(driver):
     home_page = HomePage(driver)
     home_page.open()
     home_page.confirm_address()
