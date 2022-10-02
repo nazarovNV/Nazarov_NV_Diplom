@@ -28,7 +28,15 @@ terms_of_use_link = (By.CSS_SELECTOR, '.footer__row--bottom a[href="/terms_of_us
 legal_information_link = (By.CSS_SELECTOR, '.footer__row--bottom a[href="/legal_information/"]')
 
 big_banners = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]')
+first_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-child(1) img')
 second_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-child(2) img')
+third_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-child(3) img')
+fourth_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-child(4) img')
+fifth_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-child(5) img')
+next_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-next')
+previous_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-prev')
+
+login_window = (By.CSS_SELECTOR, '.upblock__content')
 
 
 

@@ -23,10 +23,12 @@ class HomePage(BasePage):
 
     def go_to_login_screen(self):
         with allure.step("Нажать кнопку войти на главном экране"):
+            sleep(2)
             self.find_element(home_page_locators.go_to_login_screen_button).click()
 
     def fill_login_inputs_valid_data_and_submit(self):
         with allure.step("Заполнить поле логин"):
+            sleep(3)
             self.find_element(home_page_locators.login_input).send_keys("+79964410394")
         with allure.step("Заполнить поле пароль"):
             self.find_element(home_page_locators.password_input).send_keys("R911t68901234%")
@@ -127,11 +129,30 @@ class HomePage(BasePage):
         with allure.step("Проверить, что на странице есть 5 больших банеров"):
             assert len(self.find_elements(home_page_locators.big_banners)) == 5
 
+    def check_if_first_banner_is_visible(self):
+        with allure.step("Проверить, что картинка первого банера видна"):
+            assert self.is_element_visible(home_page_locators.first_banner_img).is_displayed()
+
     def check_if_second_banner_is_visible(self):
         with allure.step("Проверить, что картинка второго банера видна"):
-            assert self.find_element(home_page_locators.second_banner_img).is_displayed()
+            assert self.is_element_visible(home_page_locators.second_banner_img).is_displayed()
 
+    def check_if_third_banner_is_visible(self):
+        with allure.step("Проверить, что картинка третьего банера видна"):
+            assert self.is_element_visible(home_page_locators.third_banner_img).is_displayed()
 
+    def check_if_fourth_banner_is_visible(self):
+        with allure.step("Проверить, что картинка четвертого банера видна"):
+            assert self.is_element_visible(home_page_locators.fourth_banner_img).is_displayed()
 
+    def check_if_fifth_banner_is_visible(self):
+        with allure.step("Проверить, что картинка пятого банера видна"):
+            assert self.is_element_visible(home_page_locators.fifth_banner_img).is_displayed()
 
+    def click_next_big_banner(self):
+        with allure.step("Нажать кнопку 'Следующий банер'"):
+            self.is_element_visible(home_page_locators.next_big_banner_button).click()
 
+    def click_previous_big_banner(self):
+        with allure.step("Нажать кнопку 'Предыдущий банер'"):
+            self.is_element_visible(home_page_locators.previous_big_banner_button).click()

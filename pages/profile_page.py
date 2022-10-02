@@ -5,9 +5,13 @@ from time import sleep
 import allure
 from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
+
+from ..pages.locators import home_page_locators
 from ..pages.base_page import BasePage
 from ..pages.locators import profile_page_locators
 from faker import Faker
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class ProfilePage(BasePage):
@@ -17,9 +21,12 @@ class ProfilePage(BasePage):
 
     def go_to_my_data(self):
         with allure.step("Перейти на вкладку личные данные"):
-            sleep(5)
-            self.find_element(profile_page_locators.my_data_tab).click()
-            sleep(5)
+            sleep(3)
+            self.is_element_visible(profile_page_locators.my_data_tab).click()
+            sleep(3)
+
+    def can_not_see_login_form(self):
+        assert self.is_not_element_present(home_page_locators.login_window)
 
     def change_second_name(self):
         with allure.step("Изменить фамилию пользователя"):
@@ -40,7 +47,6 @@ class ProfilePage(BasePage):
     def save_data(self):
         with allure.step("Нажать кнопку сохранить"):
             self.find_element(profile_page_locators.save_data).click()
-            sleep(5)
 
     def change_name(self):
         with allure.step("Изменить имя пользователя"):
@@ -52,7 +58,7 @@ class ProfilePage(BasePage):
 
     def get_name(self):
         with allure.step("Получить имя пользователя"):
-            return self.find_element(profile_page_locators.my_second_name_input).get_attribute('value')
+            return self.is_element_visible(profile_page_locators.my_name_input).get_attribute('value')
 
     def get_second_name(self):
         with allure.step("Получить фамилию пользователя"):
@@ -61,7 +67,7 @@ class ProfilePage(BasePage):
     def exit_profile(self):
         with allure.step("Выйти из профиля пользователя"):
             self.find_element(profile_page_locators.exit_profile).click()
-            sleep(5)
+            # sleep(5)
 
     def change_patronymic(self):
         with allure.step("Изменить имя пользователя"):
@@ -164,4 +170,6 @@ class ProfilePage(BasePage):
                 self.find_element(profile_page_locators.change_pass_ok_button).click()
                 sleep(5)
 
-
+    def should_be_open_personal_page(self):
+        assert self.is_element_visible(profile_page_locators.profile_menu), \
+            "Страница личного кабинета пользователя не открылась"

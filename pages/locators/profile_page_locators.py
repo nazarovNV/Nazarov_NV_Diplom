@@ -21,6 +21,8 @@ new_pass_submit = (By.CSS_SELECTOR, 'button[data-test-id="button-save"]')
 change_pass_ok_button = (By.CSS_SELECTOR,
                          'div[data-test-id="popup-item"]  button[data-test-id="success-password-button"]')
 
+profile_menu = (By.XPATH, ".//*[@data-test-id='profile']")
+
 
 
 
