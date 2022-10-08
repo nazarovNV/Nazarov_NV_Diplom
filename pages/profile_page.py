@@ -85,6 +85,10 @@ class ProfilePage(BasePage):
                 return False
             return True
 
+    def remove_item_from_favorites(self):
+        with allure.step("Убрать товар из избранного"):
+            self.find_element(home_page_locators.add_to_favorite_btn).click()
+
     def check_is_user_auth(self):
         with allure.step("Проверить залогинился ли пользователь"):
             try:
@@ -250,6 +254,18 @@ class ProfilePage(BasePage):
         with allure.step("Проверить что товар который был ранее добавлен в избранном находится в избранном"):
             assert item_that_was_added in item_that_is_in_favorites, \
                 "В избранном не тот товар который вы ранее добавили"
+
+    def should_be_empty_in_favorites(self):
+        with allure.step("Проверить что нет товаров в избранном"):
+            try:
+                print(self.find_element(profile_page_locators.no_items_in_favorites).text)
+                assert "Ваш список пока пуст" in \
+                       self.find_element(profile_page_locators.no_items_in_favorites).text
+            except NoSuchElementException:
+                return False
+            except AssertionError:
+                return False
+            return True
 
     # def should_be_open_personal_page(self):
     #     assert self.is_element_visible(profile_page_locators.profile_menu), \

@@ -458,7 +458,7 @@ import allure
 #     cart_page = CartPage(driver)
 #     cart_page.delete_item_from_cart()
 #     cart_page.should_be_empty_cart()
-# ################################################
+
 # @allure.suite("Избранные товары")
 # @allure.title("Добавление товара в избранное")
 # def test_delete_item_from_favorites(driver):
@@ -483,19 +483,12 @@ import allure
 #
 #     item_that_is_in_favorites = profile_page.get_item_in_favorites()
 #     profile_page.check_item_is_in_favorites(item_that_was_added, item_that_is_in_favorites)
-#     print()
-#     print(item_that_was_added)
-#     print()
-#     print(item_that_is_in_favorites)
-#     print()
 #
-#     sleep(10)
+#     profile_page.remove_item_from_favorites()
 #
-#     cart_page = CartPage(driver)
-#     cart_page.delete_item_from_cart()
-#     cart_page.should_be_empty_cart()
-#
-#
+#     assert profile_page.should_be_empty_in_favorites(), "В избранном есть товары"
+
+
 # @allure.suite("Работа ссылок")
 # @allure.title("Проверка работы ссылки 'Информация о компании'")
 # def test_link_company_info(driver):
@@ -650,3 +643,15 @@ import allure
 #     home_page.check_if_second_banner_is_visible()
 #     home_page.click_previous_big_banner()
 #     home_page.check_if_first_banner_is_visible()
+
+
+@allure.suite("Отображение товаров")
+@allure.title("Проверка работы карусели товаров и их отображения")
+def test_items_carousel(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+    home_page.item_carousel_drag_and_drop_from_right_to_left()
+    sleep(5)
+
+

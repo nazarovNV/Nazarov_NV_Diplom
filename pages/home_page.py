@@ -1,6 +1,7 @@
 from time import sleep
 
 from selenium.common import NoSuchElementException
+from selenium.webdriver.remote.webelement import WebElement
 
 from ..pages.locators import base_page_locators
 from ..pages.base_page import BasePage
@@ -188,3 +189,9 @@ class HomePage(BasePage):
     def is_client_logged_out(self):
         with allure.step("Ждем когда пользователь разлогинится"):
             self.is_elements_text_equal_to(home_page_locators.user_logo_user_name, element_text="Войти")
+
+    def item_carousel_drag_and_drop_from_right_to_left(self):
+        with allure.step("Перемотать карусель с товарами справа налево"):
+            self.drag_and_drop_from_right_to_left(
+                home_page_locators.item_carousel_drag_and_drop_from_right_to_left_source,
+                -1000)

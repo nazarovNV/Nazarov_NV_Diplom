@@ -33,3 +33,5 @@ save_data = (By.CSS_SELECTOR, 'button[data-test-id="button-save"]')
 exit_profile = (By.CSS_SELECTOR, '.b-profile__menu-item[data-test-id="exit"]')
 
 item_in_favorites = (By.CSS_SELECTOR, '.product-card__title')
+no_items_in_favorites = (By.CSS_SELECTOR, '.b-profile-favorites__title')
+

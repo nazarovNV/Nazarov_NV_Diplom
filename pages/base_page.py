@@ -5,6 +5,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 from ..pages.locators import home_page_locators
 from ..pages.locators import base_page_locators
@@ -45,13 +46,6 @@ class BasePage:
             return False
         return True
 
-    # def is_element_enable(self, *args):
-    #     by_name, by_val = args[0]
-    #     return WebDriverWait(self.driver, 10).until(
-    #         EC.text_to_be_present_in_element_value((by_name, by_val), "Войти")
-    #     )
-    #     return self.driver.find_element(by_name, by_val)
-
     def find_elements(self, *args):
         by_name, by_val = args[0]
         return self.driver.find_elements(by_name, by_val)
@@ -62,10 +56,6 @@ class BasePage:
     def get_current_url(self):
         return self.driver.current_url
 
-    def check_for_url_is_changed(self, current_url, url_that_should_be):
-        with allure.step(f"Проверяем, что текущий url равен {url_that_should_be}"):
-            assert current_url == url_that_should_be
-
     def is_elements_text_equal_to(self, *args, element_text):
         try:
             by_name, by_val = args[0]
@@ -75,3 +65,12 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+
+    def drag_and_drop_from_right_to_left(self, source, x_offset=0, y_offset=0):
+        source_web_element = self.find_element(source)
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(source_web_element, x_offset, y_offset).perform()
+
+    def check_for_url_is_changed(self, current_url, url_that_should_be):
+        with allure.step(f"Проверяем, что текущий url равен {url_that_should_be}"):
+            assert current_url == url_that_should_be
