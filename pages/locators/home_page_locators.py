@@ -36,7 +36,10 @@ fifth_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-ch
 next_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-next')
 previous_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-prev')
 
-login_window = (By.CSS_SELECTOR, '.upblock__content')
+login_window = (By.XPATH, ".//p[@class='error' and contains(text(),'{0}')]")
+home_page = (By.CSS_SELECTOR, '.page-content')
+cart_items_counter = (By.CSS_SELECTOR, '.b-counter')
+
 
 
 

@@ -35,12 +35,22 @@ class BasePage:
             return False
         return True
 
-    def is_element_enable(self, *args):
-        by_name, by_val = args[0]
-        return WebDriverWait(self.driver, 10).until(
-            EC.text_to_be_present_in_element_value((by_name, by_val), "Войти")
-        )
-        # return self.driver.find_element(by_name, by_val)
+    def is_element_present(self, *args):
+        try:
+            by_name, by_val = args[0]
+            WebDriverWait(self.driver, 10).until_not(
+                EC.presence_of_element_located((by_name, by_val)),
+            )
+        except TimeoutException:
+            return False
+        return True
+
+    # def is_element_enable(self, *args):
+    #     by_name, by_val = args[0]
+    #     return WebDriverWait(self.driver, 10).until(
+    #         EC.text_to_be_present_in_element_value((by_name, by_val), "Войти")
+    #     )
+    #     return self.driver.find_element(by_name, by_val)
 
     def find_elements(self, *args):
         by_name, by_val = args[0]
@@ -48,7 +58,6 @@ class BasePage:
 
     def go_to_main_page(self):
         self.find_element(base_page_locators.header_logo).click()
-        sleep(2)
 
     def get_current_url(self):
         return self.driver.current_url
@@ -57,4 +66,12 @@ class BasePage:
         with allure.step(f"Проверяем, что текущий url равен {url_that_should_be}"):
             assert current_url == url_that_should_be
 
-
+    def is_elements_text_equal_to(self, *args, element_text):
+        try:
+            by_name, by_val = args[0]
+            WebDriverWait(self.driver, 10).until(
+                EC.text_to_be_present_in_element((by_name, by_val), element_text),
+            )
+        except TimeoutException:
+            return False
+        return True

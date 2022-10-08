@@ -20,6 +20,7 @@ new_pass_again = (By.CSS_SELECTOR, 'input[placeholder="Введите новый
 new_pass_submit = (By.CSS_SELECTOR, 'button[data-test-id="button-save"]')
 change_pass_ok_button = (By.CSS_SELECTOR,
                          'div[data-test-id="popup-item"]  button[data-test-id="success-password-button"]')
+change_pass_filled = (By.CSS_SELECTOR, '.b-profile-settings__row:nth-child(4) div.b-field.is-filled')
 
 profile_menu = (By.XPATH, ".//*[@data-test-id='profile']")
 

@@ -23,12 +23,10 @@ class HomePage(BasePage):
 
     def go_to_login_screen(self):
         with allure.step("Нажать кнопку войти на главном экране"):
-            sleep(2)
             self.find_element(home_page_locators.go_to_login_screen_button).click()
 
     def fill_login_inputs_valid_data_and_submit(self):
         with allure.step("Заполнить поле логин"):
-            sleep(3)
             self.find_element(home_page_locators.login_input).send_keys("+79964410394")
         with allure.step("Заполнить поле пароль"):
             self.find_element(home_page_locators.password_input).send_keys("R911t68901234%")
@@ -46,16 +44,18 @@ class HomePage(BasePage):
     def add_item_to_cart(self):
         with allure.step("Добавить товар в корзину"):
             self.find_element(home_page_locators.buy_button).click()
-            sleep(5)
 
     def get_item_that_i_added(self):
         with allure.step("Получить название товара который будет добавлен в корзину"):
             return self.find_element(home_page_locators.item_name).text
 
+    def can_see_number_in_cart(self):
+        with allure.step("Проверяем есть ли цифра у знака корзины"):
+            assert self.is_element_present(home_page_locators.cart_items_counter)
+
     def go_to_cart(self):
         with allure.step("Перейти в корзину пользователя"):
             self.find_element(home_page_locators.my_cart_button).click()
-            sleep(2)
 
     def check_for_error_message(self):
         with allure.step("Проверить есть ли сообщение о неверном пароле"):
@@ -149,6 +149,10 @@ class HomePage(BasePage):
         with allure.step("Проверить, что картинка пятого банера видна"):
             assert self.is_element_visible(home_page_locators.fifth_banner_img).is_displayed()
 
+    def can_see_login_form(self):
+        with allure.step("Проверить видно ли окно логина"):
+            assert self.is_element_present(home_page_locators.login_window)
+
     def click_next_big_banner(self):
         with allure.step("Нажать кнопку 'Следующий банер'"):
             self.is_element_visible(home_page_locators.next_big_banner_button).click()
@@ -156,3 +160,15 @@ class HomePage(BasePage):
     def click_previous_big_banner(self):
         with allure.step("Нажать кнопку 'Предыдущий банер'"):
             self.is_element_visible(home_page_locators.previous_big_banner_button).click()
+
+    def is_name_changed(self, expected_name):
+        with allure.step("Ждем когда имя изменится"):
+            self.is_elements_text_equal_to(home_page_locators.user_logo_user_name, element_text=expected_name)
+
+    def is_it_homepage(self):
+        with allure.step("Ждем когда прогрузится главная страница"):
+            assert self.is_element_visible(home_page_locators.home_page)
+
+    def is_client_logged_out(self):
+        with allure.step("Ждем когда пользователь разлогинится"):
+            self.is_elements_text_equal_to(home_page_locators.user_logo_user_name, element_text="Войти")

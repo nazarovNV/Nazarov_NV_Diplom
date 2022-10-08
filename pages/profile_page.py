@@ -21,12 +21,10 @@ class ProfilePage(BasePage):
 
     def go_to_my_data(self):
         with allure.step("Перейти на вкладку личные данные"):
-            sleep(3)
             self.is_element_visible(profile_page_locators.my_data_tab).click()
-            sleep(3)
 
-    def can_not_see_login_form(self):
-        assert self.is_not_element_present(home_page_locators.login_window)
+    # def can_not_see_login_form(self):
+    #     assert self.is_not_element_present(home_page_locators.login_window)
 
     def change_second_name(self):
         with allure.step("Изменить фамилию пользователя"):
@@ -130,10 +128,9 @@ class ProfilePage(BasePage):
 
     def check_for_error_date_of_birth_minor_user(self):
         with allure.step("Проверить, что сообщение 'Возраст должен быть совершеннолетним'"):
-            sleep(3)
             assert self.find_element(profile_page_locators.error_date_of_birth).text == \
                    "Возраст должен быть совершеннолетним", \
-                "Ошибка 'Возраст должен быть совершеннолетним' не отображается"
+                   "Ошибка 'Возраст должен быть совершеннолетним' не отображается"
 
     def change_date_of_birth_incorrect_data(self):
         with allure.step("Изменить дату рождения пользователя на некорректную"):
@@ -143,16 +140,13 @@ class ProfilePage(BasePage):
 
     def check_for_error_date_of_birth_incorrect_data(self):
         with allure.step("Проверить, что сообщение 'Месяц введен некорректный'"):
-            sleep(3)
             assert self.find_element(profile_page_locators.error_date_of_birth).text == \
                    "Месяц введен некорректный", \
-                "Ошибка 'Месяц введен некорректный' не отображается"
+                   "Ошибка 'Месяц введен некорректный' не отображается"
 
     def go_to_my_setting(self):
         with allure.step("Перейти на вкладку настройки"):
-            sleep(5)
             self.find_element(profile_page_locators.my_setting_tab).click()
-            sleep(5)
 
     def change_password_in_profile(self):
         with allure.step("Изменить пароль пользователя"):
@@ -162,14 +156,15 @@ class ProfilePage(BasePage):
                 self.find_element(profile_page_locators.new_pass).send_keys("R911t689012345")
             with allure.step("Заполнить поле новый пароль еще раз"):
                 self.find_element(profile_page_locators.new_pass_again).send_keys("R911t689012345")
-                sleep(1)
-            with allure.step("Нажать кнопку сохранить"):
+            with allure.step("Проверяем, что данные заполнены и можно нажимать кнопку 'Создать новый пароль'"):
+                assert self.is_element_visible(profile_page_locators.change_pass_filled)
+            with allure.step("Нажать кнопку 'Создать новый пароль'"):
+                sleep(2)
                 self.find_element(profile_page_locators.new_pass_submit).click()
-                sleep(5)
             with allure.step("Нажать кнопку Хорошо в открывшемся меню"):
+                assert self.is_element_visible(profile_page_locators.change_pass_ok_button)
                 self.find_element(profile_page_locators.change_pass_ok_button).click()
-                sleep(5)
 
-    def should_be_open_personal_page(self):
-        assert self.is_element_visible(profile_page_locators.profile_menu), \
-            "Страница личного кабинета пользователя не открылась"
+    # def should_be_open_personal_page(self):
+    #     assert self.is_element_visible(profile_page_locators.profile_menu), \
+    #         "Страница личного кабинета пользователя не открылась"
