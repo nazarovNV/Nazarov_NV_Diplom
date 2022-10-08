@@ -38,7 +38,7 @@ class BasePage:
     def is_element_present(self, *args):
         try:
             by_name, by_val = args[0]
-            WebDriverWait(self.driver, 10).until_not(
+            WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((by_name, by_val)),
             )
         except TimeoutException:
@@ -57,7 +57,7 @@ class BasePage:
         return self.driver.find_elements(by_name, by_val)
 
     def go_to_main_page(self):
-        self.find_element(base_page_locators.header_logo).click()
+        self.is_element_visible(base_page_locators.header_logo).click()
 
     def get_current_url(self):
         return self.driver.current_url

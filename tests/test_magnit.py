@@ -265,9 +265,63 @@ import allure
 #     profile_page.check_for_error_date_of_birth_incorrect_data()
 #
 #
-# @allure.suite("Изменение данных пользователя")
-# @allure.title("Проверка возможности авторизоваться после смены пароля")
-# def test_change_password(driver, change_pass_back):
+@allure.suite("Изменение данных пользователя")
+@allure.title("Проверка возможности авторизоваться после смены пароля")
+def test_change_password(driver, change_pass_back):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+    home_page.go_to_login_screen()
+    home_page.can_see_login_form()
+    home_page.fill_login_inputs_valid_data_and_submit()
+    profile_page = ProfilePage(driver)
+
+    profile_page.go_to_my_setting()
+    profile_page.change_password_in_profile()
+
+    profile_page.exit_profile()
+
+    home_page = HomePage(driver)
+
+    home_page.is_it_homepage()
+    home_page.is_client_logged_out()
+
+    home_page.go_to_login_screen()
+    home_page.fill_login_inputs_with_new_pass_and_submit()
+    profile_page = ProfilePage(driver)
+    assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
+
+
+# @allure.suite("Корзина")
+# @allure.title("Добавление товара в корзину(не авторизованный пользователь)")
+# def test_add_item(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     item_that_was_added = home_page.get_item_that_i_added()
+#     home_page.add_item_to_cart()
+#     home_page.can_see_number_in_cart()
+#     home_page.go_to_cart()
+#     cart_page = CartPage(driver)
+#     item_that_is_in_cart = cart_page.get_item_in_cart()
+#     cart_page.check_item_is_in_cart(item_that_was_added, item_that_is_in_cart)
+
+# @allure.suite("Корзина")
+# @allure.title("Удаление товара из корзины(не авторизованный пользователь)")
+# def test_delete_item_from_cart_no_auth(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.add_item_to_cart()
+#     home_page.can_see_number_in_cart()
+#     home_page.go_to_cart()
+#     cart_page = CartPage(driver)
+#     cart_page.delete_item_from_cart()
+#     cart_page.should_be_empty_cart()
+
+# @allure.suite("Корзина")
+# @allure.title("Удаление товара из корзины(авторизованный пользователь)")
+# def test_delete_item_from_cart_auth(driver):
 #     home_page = HomePage(driver)
 #     home_page.open()
 #     home_page.confirm_address()
@@ -275,50 +329,18 @@ import allure
 #     home_page.can_see_login_form()
 #     home_page.fill_login_inputs_valid_data_and_submit()
 #     profile_page = ProfilePage(driver)
-#
-#     profile_page.go_to_my_setting()
-#     profile_page.change_password_in_profile()
-#
-#     profile_page.exit_profile()
-#
-#     home_page = HomePage(driver)
-#
+#     sleep(5)
+#     profile_page.go_to_main_page()
 #     home_page.is_it_homepage()
-#     home_page.is_client_logged_out()
 #
-#     home_page.go_to_login_screen()
-#     home_page.fill_login_inputs_with_new_pass_and_submit()
-#     profile_page = ProfilePage(driver)
-#     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
-
-
-@allure.suite("Корзина")
-@allure.title("Добавление товара в корзину(не авторизованный пользователь)")
-def test_add_item(driver):
-    home_page = HomePage(driver)
-    home_page.open()
-    home_page.confirm_address()
-    item_that_was_added = home_page.get_item_that_i_added()
-    home_page.add_item_to_cart()
-
-    home_page.can_see_number_in_cart()
-    home_page.go_to_cart()
-    cart_page = CartPage(driver)
-    item_that_is_in_cart = cart_page.get_item_in_cart()
-    cart_page.check_item_is_in_cart(item_that_was_added, item_that_is_in_cart)
-
-# @allure.suite("Корзина")
-# @allure.title("Удаление товара из корзины(не авторизованный пользователь)")
-# def test_delete_item_from_cart(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.confirm_address()
 #     home_page.add_item_to_cart()
+#     home_page.can_see_number_in_cart()
 #     home_page.go_to_cart()
 #     cart_page = CartPage(driver)
 #     cart_page.delete_item_from_cart()
 #     cart_page.should_be_empty_cart()
-#
+##################
+
 #
 # @allure.suite("Работа ссылок")
 # @allure.title("Проверка работы ссылки 'Информация о компании'")

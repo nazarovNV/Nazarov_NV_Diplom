@@ -151,7 +151,7 @@ class HomePage(BasePage):
 
     def can_see_login_form(self):
         with allure.step("Проверить видно ли окно логина"):
-            assert self.is_element_present(home_page_locators.login_window)
+            assert self.is_not_element_present(home_page_locators.login_window)
 
     def click_next_big_banner(self):
         with allure.step("Нажать кнопку 'Следующий банер'"):
