@@ -23,6 +23,18 @@ class ProfilePage(BasePage):
         with allure.step("Перейти на вкладку личные данные"):
             self.is_element_visible(profile_page_locators.my_data_tab).click()
 
+    def go_to_my_orders(self):
+        with allure.step("Перейти на вкладку 'Мои заказы'"):
+            self.is_element_visible(profile_page_locators.my_orders_tab).click()
+
+    def go_to_my_favorites(self):
+        with allure.step("Перейти на вкладку 'Избранное'"):
+            self.is_element_visible(profile_page_locators.my_favorites_tab).click()
+
+    def get_item_in_favorites(self):
+        with allure.step("Получить название товара в избранном"):
+            return self.find_element(profile_page_locators.item_in_favorites).text
+
     # def can_not_see_login_form(self):
     #     assert self.is_not_element_present(home_page_locators.login_window)
 
@@ -34,10 +46,49 @@ class ProfilePage(BasePage):
             self.find_element(profile_page_locators.my_second_name_input).send_keys(rand_string)
             return rand_string
 
+    def change_second_name_with_wrong_data(self):
+        with allure.step("Заполнить поле 'Фамилия' не валидными данными"):
+            rand_string = ''.join(random.choice('1234567890') for i in range(8))
+            self.find_element(profile_page_locators.my_second_name_input).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_second_name_input).send_keys(Keys.DELETE)
+            self.find_element(profile_page_locators.my_second_name_input).send_keys(rand_string)
+            return rand_string
+
+    def change_second_name_with_empty_data(self):
+        with allure.step("Заполнить фамилия пользователя пустой строкой"):
+            empty_string = ''
+            self.find_element(profile_page_locators.my_second_name_input).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_second_name_input).send_keys(Keys.DELETE)
+            self.find_element(profile_page_locators.my_second_name_input).send_keys("")
+            return empty_string
+
+    def change_patronymic_with_wrong_data(self):
+        with allure.step("Заполнить отчество пользователя неверными данными"):
+            rand_string = ''.join(random.choice('1234567890') for i in range(8))
+            self.find_element(profile_page_locators.my_patronymic_input).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_patronymic_input).send_keys(Keys.DELETE)
+            self.find_element(profile_page_locators.my_patronymic_input).send_keys(rand_string)
+            return rand_string
+
+    def change_patronymic_with_empty_data(self):
+        with allure.step("Заполнить отчество пользователя пустой строкой"):
+            empty_string = ''
+            self.find_element(profile_page_locators.my_patronymic_input).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_patronymic_input).send_keys(Keys.DELETE)
+            return empty_string
+
     def check_for_my_orders_tab_on_page(self):
         with allure.step("Проверить залогинился ли пользователь"):
             try:
                 self.find_element(profile_page_locators.my_orders_tab)
+            except NoSuchElementException:
+                return False
+            return True
+
+    def check_is_user_auth(self):
+        with allure.step("Проверить залогинился ли пользователь"):
+            try:
+                self.is_element_visible(profile_page_locators.my_orders_tab)
             except NoSuchElementException:
                 return False
             return True
@@ -49,6 +100,14 @@ class ProfilePage(BasePage):
     def change_name(self):
         with allure.step("Изменить имя пользователя"):
             rand_string = ''.join(random.choice('абвгдежзийклмнопрстуфхцчшщъыьэюя') for i in range(8))
+            self.find_element(profile_page_locators.my_name_input).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_name_input).send_keys(Keys.DELETE)
+            self.find_element(profile_page_locators.my_name_input).send_keys(rand_string)
+            return rand_string
+
+    def change_name_with_number(self):
+        with allure.step("Изменить имя пользователя цифрами"):
+            rand_string = ''.join(random.choice('1234567890') for i in range(8))
             self.find_element(profile_page_locators.my_name_input).send_keys(Keys.CONTROL + "a")
             self.find_element(profile_page_locators.my_name_input).send_keys(Keys.DELETE)
             self.find_element(profile_page_locators.my_name_input).send_keys(rand_string)
@@ -80,12 +139,20 @@ class ProfilePage(BasePage):
             return self.find_element(profile_page_locators.my_patronymic_input).get_attribute('value')
 
     def change_email(self):
-        with allure.step("Изменить имя пользователя"):
+        with allure.step("Изменить почту пользователя"):
             rand_string = ''.join(random.choice(string.ascii_letters) for i in range(30))
             self.find_element(profile_page_locators.my_email).send_keys(Keys.CONTROL + "a")
             self.find_element(profile_page_locators.my_email).send_keys(Keys.DELETE)
             self.find_element(profile_page_locators.my_email).send_keys(rand_string + "@gmail.com")
             return rand_string + "@gmail.com"
+
+    def change_email_wrong_data(self):
+        with allure.step("Изменить имя пользователя"):
+            rand_string = ''.join(random.choice(string.ascii_letters) for i in range(30))
+            self.find_element(profile_page_locators.my_email).send_keys(Keys.CONTROL + "a")
+            self.find_element(profile_page_locators.my_email).send_keys(Keys.DELETE)
+            self.find_element(profile_page_locators.my_email).send_keys(rand_string)
+            return rand_string
 
     def get_email(self):
         with allure.step("Получить фамилию пользователя"):
@@ -144,6 +211,20 @@ class ProfilePage(BasePage):
                    "Месяц введен некорректный", \
                    "Ошибка 'Месяц введен некорректный' не отображается"
 
+    def check_for_error_name_with_number_incorrect_data(self):
+        with allure.step("Проверить, что сообщение 'Разрешены только буквы, дефисы и пробелы'"):
+            assert self.find_element(profile_page_locators.error_date_of_birth).text == \
+                   "Разрешены только буквы, дефисы и пробелы", \
+                   "Ошибка 'Разрешены только буквы, дефисы и пробелы' не отображается"
+
+    def check_for_error_email_wrong_data(self):
+        with allure.step("Проверить, что сообщение "
+                         "'Адрес электронной почты должен содержать символ @, разрешены символы . - и _'"):
+            assert self.find_element(profile_page_locators.error_email_wrong_data).text == \
+                   "Адрес электронной почты должен содержать символ @, разрешены символы . - и _", \
+                   "Ошибка 'Адрес электронной почты должен содержать символ @, разрешены символы . - и _' " \
+                   "не отображается"
+
     def go_to_my_setting(self):
         with allure.step("Перейти на вкладку настройки"):
             self.find_element(profile_page_locators.my_setting_tab).click()
@@ -164,6 +245,11 @@ class ProfilePage(BasePage):
             with allure.step("Нажать кнопку Хорошо в открывшемся меню"):
                 assert self.is_element_visible(profile_page_locators.change_pass_ok_button)
                 self.find_element(profile_page_locators.change_pass_ok_button).click()
+
+    def check_item_is_in_favorites(self, item_that_was_added, item_that_is_in_favorites):
+        with allure.step("Проверить что товар который был ранее добавлен в избранном находится в избранном"):
+            assert item_that_was_added in item_that_is_in_favorites, \
+                "В избранном не тот товар который вы ранее добавили"
 
     # def should_be_open_personal_page(self):
     #     assert self.is_element_visible(profile_page_locators.profile_menu), \

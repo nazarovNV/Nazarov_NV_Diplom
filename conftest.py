@@ -47,25 +47,21 @@ def driver():
 @pytest.fixture(scope='function')
 def change_pass_back():
     yield
-    url = "https://apteka.magnit.ru/api/personal/auth/"
-
-    payload = json.dumps({
+    session = requests.Session()
+    data = {
         "login": "79964410394",
         "password": "R911t689012345",
         "remember": False
-    })
-    headers = {
-        'Content-Type': 'application/json'
     }
+    url = "https://apteka.magnit.ru/api/personal/auth/"
 
-    requests.request("POST", url, headers=headers, data=payload)
+    session.post(url, data=data)
 
     url = "https://apteka.magnit.ru/api/personal/password/change/"
 
-    payload = {'password': 'R911t68901234%',
-               'passwordConfirm': 'R911t68901234%',
-               'currentPassword': 'R911t689012345'}
-    files = [
+    data = {
+        'password': 'R911t68901234%',
+        'passwordConfirm': 'R911t68901234%',
+        'currentPassword': 'R911t689012345'}
 
-    ]
-    requests.request("POST", url, data=payload, files=files)
+    session.post(url, data=data)

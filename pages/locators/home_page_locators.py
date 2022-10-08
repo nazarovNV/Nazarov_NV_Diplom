@@ -9,11 +9,13 @@ login_input = (By.CSS_SELECTOR, 'input[placeholder="Телефон или эле
 password_input = (By.CSS_SELECTOR, 'input[placeholder="Пароль"]')
 submit_button = (By.CSS_SELECTOR, 'button[data-test-id="button-login"]')
 buy_button = (By.CSS_SELECTOR, 'button[data-test-id="product-buy-btn"]')
+add_to_favorite_btn = (By.CSS_SELECTOR, 'button[data-test-id="favorite-btn"]')
 item_name = (By.CSS_SELECTOR, '.product-card__title')
 my_cart_button = (By.CSS_SELECTOR, '.header__userzone-control--basket')
 wrong_password_error = (By.CSS_SELECTOR, '.upblock__content .error')
 user_logo = (By.CSS_SELECTOR, '.header__userzone-control--auth')
 user_logo_user_name = (By.CSS_SELECTOR, '.header__userzone-control--auth .header__userzone-label')
+
 
 company_info_link = (By.CSS_SELECTOR, '.footer__nav a[href="/about-magnit/"]')
 contacts_link = (By.CSS_SELECTOR, '.footer__nav a[href="/contacts/"]')
@@ -36,7 +38,8 @@ fifth_banner_img = (By.CSS_SELECTOR, 'div[data-test-id="carouser-banner"]:nth-ch
 next_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-next')
 previous_big_banner_button = (By.CSS_SELECTOR, '.swiper-button-prev')
 
-login_window = (By.XPATH, ".//p[@class='error' and contains(text(),'{0}')]")
+# login_window = (By.XPATH, ".//p[@class='error' and contains(text(),'{0}')]")
+login_window = (By.CSS_SELECTOR, ".upblock__wrapper")
 home_page = (By.CSS_SELECTOR, '.page-content')
 cart_items_counter = (By.CSS_SELECTOR, '.b-counter')
 

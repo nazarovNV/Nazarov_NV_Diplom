@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 
-
 my_data_tab = (By.CSS_SELECTOR, 'a[data-test-id="personal-data-tab"]')
 my_setting_tab = (By.CSS_SELECTOR, 'a[data-test-id="option-tab"]')
 my_orders_tab = (By.CSS_SELECTOR, 'a[data-test-id="my-order-tab"]')
+my_favorites_tab = (By.CSS_SELECTOR, 'a[data-test-id="favorite-tab"]')
 
 my_second_name_input = (By.CSS_SELECTOR, 'input[placeholder="Фамилия"]')
 my_name_input = (By.CSS_SELECTOR, 'input[placeholder="Имя"]')
@@ -24,11 +24,12 @@ change_pass_filled = (By.CSS_SELECTOR, '.b-profile-settings__row:nth-child(4) di
 
 profile_menu = (By.XPATH, ".//*[@data-test-id='profile']")
 
-
-
-
 error_date_of_birth = (By.CSS_SELECTOR, '.b-field__error')
+error_name_with_numbers = (By.CSS_SELECTOR, '.b-field__error')
+error_email_wrong_data = (By.CSS_SELECTOR, '.b-field__error')
+
 
 save_data = (By.CSS_SELECTOR, 'button[data-test-id="button-save"]')
 exit_profile = (By.CSS_SELECTOR, '.b-profile__menu-item[data-test-id="exit"]')
 
+item_in_favorites = (By.CSS_SELECTOR, '.product-card__title')

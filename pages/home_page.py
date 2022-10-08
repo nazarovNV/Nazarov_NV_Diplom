@@ -33,6 +33,14 @@ class HomePage(BasePage):
         with allure.step("Нажать кнопку войти"):
             self.find_element(home_page_locators.submit_button).click()
 
+    def fill_login_email_inputs_valid_data_and_submit(self):
+        with allure.step("Заполнить поле логин"):
+            self.find_element(home_page_locators.login_input).send_keys("mytestemaillogin@mail.ru")
+        with allure.step("Заполнить поле пароль"):
+            self.find_element(home_page_locators.password_input).send_keys("R911t68901234%")
+        with allure.step("Нажать кнопку войти"):
+            self.find_element(home_page_locators.submit_button).click()
+
     def fill_login_inputs_wrong_data_and_submit(self):
         with allure.step("Заполнить поле логин"):
             self.find_element(home_page_locators.login_input).send_keys("+79964410394")
@@ -44,6 +52,14 @@ class HomePage(BasePage):
     def add_item_to_cart(self):
         with allure.step("Добавить товар в корзину"):
             self.find_element(home_page_locators.buy_button).click()
+
+    def add_item_to_favorites(self):
+        with allure.step("Добавить товар в избранное"):
+            self.find_element(home_page_locators.add_to_favorite_btn).click()
+
+    def get_item_that_i_added_to_favorites(self):
+        with allure.step("Получить название товара который будет добавлен в избранное"):
+            return self.find_element(home_page_locators.item_name).text
 
     def get_item_that_i_added(self):
         with allure.step("Получить название товара который будет добавлен в корзину"):
@@ -151,7 +167,7 @@ class HomePage(BasePage):
 
     def can_see_login_form(self):
         with allure.step("Проверить видно ли окно логина"):
-            assert self.is_not_element_present(home_page_locators.login_window)
+            assert self.is_element_present(home_page_locators.login_window)
 
     def click_next_big_banner(self):
         with allure.step("Нажать кнопку 'Следующий банер'"):

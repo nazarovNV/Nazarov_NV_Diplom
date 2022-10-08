@@ -17,7 +17,20 @@ import allure
 #     profile_page = ProfilePage(driver)
 #     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
 #
-
+# @allure.suite("Авторизация")
+# @allure.title("Авторизация с валидными данными через почту")
+# def test_login_email(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#
+#     home_page.fill_login_email_inputs_valid_data_and_submit()
+#
+#     profile_page = ProfilePage(driver)
+#     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
+#
 # @allure.suite("Авторизация")
 # @allure.title("Авторизация с невалидными данными")
 # def test_login_wrong_password(driver):
@@ -28,8 +41,8 @@ import allure
 #     home_page.can_see_login_form()
 #     home_page.fill_login_inputs_wrong_data_and_submit()
 #     assert home_page.check_for_error_message(), "Нет сообщения о неверном пароле"
-
-
+#
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Имя на иконке пользователя на главной странице меняется если изменить имя")
 # def test_change_name_at_profile_icon(driver):
@@ -40,7 +53,7 @@ import allure
 #     home_page.can_see_login_form()
 #     home_page.fill_login_inputs_valid_data_and_submit()
 #     profile_page = ProfilePage(driver)
-
+#
 #     profile_page.go_to_my_data()
 #     new_name = profile_page.change_name()
 #     profile_page.save_data()
@@ -48,8 +61,8 @@ import allure
 #     home_page = HomePage(driver)
 #     home_page.is_name_changed(new_name)
 #     assert home_page.get_user_name() == new_name, "Имя не изменилось"
-
-
+#
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Изменение имени пользователя и проверка имени после повторной авторизации")
 # def test_change_name(driver):
@@ -75,8 +88,8 @@ import allure
 #     profile_page = ProfilePage(driver)
 #     profile_page.go_to_my_data()
 #     assert profile_page.get_name() == new_name, "Имя не изменилось"
-
-
+#
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Изменение фамилии пользователя и проверка фамилии после повторной авторизации")
 # def test_change_second_name(driver):
@@ -106,7 +119,7 @@ import allure
 #     profile_page.go_to_my_data()
 #
 #     assert profile_page.get_second_name() == new_second_name, "Фамилия не изменилась"
-
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Изменение отчества пользователя и проверка отчества после повторной авторизации")
 # def test_change_patronymic(driver):
@@ -167,8 +180,8 @@ import allure
 #     profile_page.go_to_my_data()
 #
 #     assert profile_page.get_email() == new_email, "Почта не изменилась"
-
-
+#
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Изменение даты рождения пользователя и проверка даты рождения после повторной авторизации")
 # def test_change_date_of_birth(driver):
@@ -198,8 +211,8 @@ import allure
 #     profile_page.go_to_my_data()
 #
 #     assert profile_page.get_date_of_birth() == new_date_of_birth, "Дата рождения не изменилась"
-
-
+#
+#
 # @allure.suite("Изменение данных пользователя")
 # @allure.title("Изменение пола пользователя и проверка пола после повторной авторизации")
 # def test_change_gender(driver):
@@ -264,34 +277,139 @@ import allure
 #
 #     profile_page.check_for_error_date_of_birth_incorrect_data()
 #
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что нельзя ввести в поле 'имя' цифры")
+# def test_name_incorrect_data(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
 #
-@allure.suite("Изменение данных пользователя")
-@allure.title("Проверка возможности авторизоваться после смены пароля")
-def test_change_password(driver, change_pass_back):
-    home_page = HomePage(driver)
-    home_page.open()
-    home_page.confirm_address()
-    home_page.go_to_login_screen()
-    home_page.can_see_login_form()
-    home_page.fill_login_inputs_valid_data_and_submit()
-    profile_page = ProfilePage(driver)
-
-    profile_page.go_to_my_setting()
-    profile_page.change_password_in_profile()
-
-    profile_page.exit_profile()
-
-    home_page = HomePage(driver)
-
-    home_page.is_it_homepage()
-    home_page.is_client_logged_out()
-
-    home_page.go_to_login_screen()
-    home_page.fill_login_inputs_with_new_pass_and_submit()
-    profile_page = ProfilePage(driver)
-    assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
-
-
+#     profile_page.go_to_my_data()
+#     profile_page.change_name_with_number()
+#     profile_page.check_for_error_name_with_number_incorrect_data()
+#
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что если в поле 'Фамилия' есть недопустимые символы, то данные не сохранятся")
+# def test_change_second_name_incorrect_data(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_data()
+#
+#     new_second_name = profile_page.change_second_name_with_wrong_data()
+#     profile_page.save_data()
+#     profile_page.go_to_my_orders()
+#     profile_page.go_to_my_data()
+#     assert profile_page.get_second_name() != new_second_name, "В фамилии есть недопустимые символы"
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что если в поле 'Отчество' есть недопустимые символы, то данные не сохранятся")
+# def test_change_patronymic_incorrect_data(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_data()
+#
+#     new_patronymic = profile_page.change_patronymic_with_wrong_data()
+#     profile_page.save_data()
+#     profile_page.go_to_my_orders()
+#     profile_page.go_to_my_data()
+#     assert profile_page.get_patronymic() != new_patronymic, "В отчество есть недопустимые символы"
+#
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что если оставить поле 'Отчество' пустым, то данные сохранятся")
+# def test_change_patronymic_empty_field(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_data()
+#
+#     new_patronymic = profile_page.change_patronymic_with_empty_data()
+#     profile_page.save_data()
+#     profile_page.go_to_my_orders()
+#     profile_page.go_to_my_data()
+#     assert profile_page.get_patronymic() == new_patronymic, "Отчество заполнено"
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что если оставить поле 'Фамилия' пустым, то данные сохранятся")
+# def test_change_second_name_empty_field(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_data()
+#
+#     new_second_name = profile_page.change_second_name_with_empty_data()
+#     profile_page.save_data()
+#     profile_page.go_to_my_orders()
+#     profile_page.go_to_my_data()
+#     assert profile_page.get_second_name() == new_second_name, "Фамилия заполнено"
+#
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка того, что нельзя ввести в поле почта значение без '@mail.ru'")
+# def test_change_email_wrong_data(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_data()
+#
+#     profile_page.change_email_wrong_data()
+#     profile_page.check_for_error_email_wrong_data()
+#
+#
+# @allure.suite("Изменение данных пользователя")
+# @allure.title("Проверка возможности авторизоваться после смены пароля")
+# def test_change_password(driver, change_pass_back):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#     profile_page = ProfilePage(driver)
+#
+#     profile_page.go_to_my_setting()
+#     profile_page.change_password_in_profile()
+#
+#     profile_page.exit_profile()
+#
+#     home_page = HomePage(driver)
+#
+#     home_page.is_it_homepage()
+#     home_page.is_client_logged_out()
+#
+#     home_page.go_to_login_screen()
+#     home_page.fill_login_inputs_with_new_pass_and_submit()
+#     profile_page = ProfilePage(driver)
+#     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
+#
+#
 # @allure.suite("Корзина")
 # @allure.title("Добавление товара в корзину(не авторизованный пользователь)")
 # def test_add_item(driver):
@@ -305,7 +423,8 @@ def test_change_password(driver, change_pass_back):
 #     cart_page = CartPage(driver)
 #     item_that_is_in_cart = cart_page.get_item_in_cart()
 #     cart_page.check_item_is_in_cart(item_that_was_added, item_that_is_in_cart)
-
+#
+#
 # @allure.suite("Корзина")
 # @allure.title("Удаление товара из корзины(не авторизованный пользователь)")
 # def test_delete_item_from_cart_no_auth(driver):
@@ -318,7 +437,7 @@ def test_change_password(driver, change_pass_back):
 #     cart_page = CartPage(driver)
 #     cart_page.delete_item_from_cart()
 #     cart_page.should_be_empty_cart()
-
+#
 # @allure.suite("Корзина")
 # @allure.title("Удаление товара из корзины(авторизованный пользователь)")
 # def test_delete_item_from_cart_auth(driver):
@@ -328,19 +447,54 @@ def test_change_password(driver, change_pass_back):
 #     home_page.go_to_login_screen()
 #     home_page.can_see_login_form()
 #     home_page.fill_login_inputs_valid_data_and_submit()
+#
 #     profile_page = ProfilePage(driver)
-#     sleep(5)
+#     profile_page.check_is_user_auth()
 #     profile_page.go_to_main_page()
 #     home_page.is_it_homepage()
-#
 #     home_page.add_item_to_cart()
 #     home_page.can_see_number_in_cart()
 #     home_page.go_to_cart()
 #     cart_page = CartPage(driver)
 #     cart_page.delete_item_from_cart()
 #     cart_page.should_be_empty_cart()
-##################
-
+# ################################################
+# @allure.suite("Избранные товары")
+# @allure.title("Добавление товара в избранное")
+# def test_delete_item_from_favorites(driver):
+#     home_page = HomePage(driver)
+#     home_page.open()
+#     home_page.confirm_address()
+#     home_page.go_to_login_screen()
+#     home_page.can_see_login_form()
+#     home_page.fill_login_inputs_valid_data_and_submit()
+#
+#     profile_page = ProfilePage(driver)
+#     profile_page.check_is_user_auth()
+#     profile_page.go_to_main_page()
+#     home_page.is_it_homepage()
+#
+#     home_page.add_item_to_favorites()
+#     item_that_was_added = home_page.get_item_that_i_added_to_favorites()
+#
+#     home_page.go_to_login_screen()
+#     profile_page = ProfilePage(driver)
+#     profile_page.go_to_my_favorites()
+#
+#     item_that_is_in_favorites = profile_page.get_item_in_favorites()
+#     profile_page.check_item_is_in_favorites(item_that_was_added, item_that_is_in_favorites)
+#     print()
+#     print(item_that_was_added)
+#     print()
+#     print(item_that_is_in_favorites)
+#     print()
+#
+#     sleep(10)
+#
+#     cart_page = CartPage(driver)
+#     cart_page.delete_item_from_cart()
+#     cart_page.should_be_empty_cart()
+#
 #
 # @allure.suite("Работа ссылок")
 # @allure.title("Проверка работы ссылки 'Информация о компании'")
