@@ -35,3 +35,11 @@ exit_profile = (By.CSS_SELECTOR, '.b-profile__menu-item[data-test-id="exit"]')
 item_in_favorites = (By.CSS_SELECTOR, '.product-card__title')
 no_items_in_favorites = (By.CSS_SELECTOR, '.b-profile-favorites__title')
 
+you_do_not_have_orders_yet = (By.CSS_SELECTOR, '.b-profile-orders__wrapper div div')
+done_orders_tab = (By.CSS_SELECTOR, 'div[data-test-id="done-orders-tab"]')
+order_item_id = (By.CSS_SELECTOR, '.b-profile-order__title--active')
+
+
+
+
+

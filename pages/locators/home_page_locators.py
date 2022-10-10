@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 sign_in_button = (By.CLASS_NAME, 'login')
 go_to_login_screen_button = (By.CSS_SELECTOR,
                              'div[class="header__userzone-image header__userzone-image--auth"]')
-confirm_address_button = (By.CSS_SELECTOR, '.b-location-confirmation__buttons-list button')
+confirm_address_button = (By.CSS_SELECTOR, '.b-location-confirmation .b-location-confirmation__buttons-list button')
 login_input = (By.CSS_SELECTOR, 'input[placeholder="Телефон или электронная почта"]')
 password_input = (By.CSS_SELECTOR, 'input[placeholder="Пароль"]')
 submit_button = (By.CSS_SELECTOR, 'button[data-test-id="button-login"]')
@@ -46,3 +46,5 @@ item_carousel_drag_and_drop_from_right_to_left_source = (By.CSS_SELECTOR, 'div.i
                                                                           '.b-page-block:nth-child(2) '
                                                                           '.product-list__item:nth-child(4) button['
                                                                           'data-test-id="product-buy-btn"]')
+right_item_carousel = (By.CSS_SELECTOR, 'div.index-page__product-lists .b-page-block:nth-child(2) '
+                                        '.product-list__item:nth-child(7)')

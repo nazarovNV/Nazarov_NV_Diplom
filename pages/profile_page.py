@@ -10,8 +10,6 @@ from ..pages.locators import home_page_locators
 from ..pages.base_page import BasePage
 from ..pages.locators import profile_page_locators
 from faker import Faker
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class ProfilePage(BasePage):
@@ -34,9 +32,6 @@ class ProfilePage(BasePage):
     def get_item_in_favorites(self):
         with allure.step("Получить название товара в избранном"):
             return self.find_element(profile_page_locators.item_in_favorites).text
-
-    # def can_not_see_login_form(self):
-    #     assert self.is_not_element_present(home_page_locators.login_window)
 
     def change_second_name(self):
         with allure.step("Изменить фамилию пользователя"):
@@ -100,6 +95,7 @@ class ProfilePage(BasePage):
     def save_data(self):
         with allure.step("Нажать кнопку сохранить"):
             self.find_element(profile_page_locators.save_data).click()
+            sleep(2)
 
     def change_name(self):
         with allure.step("Изменить имя пользователя"):
@@ -128,7 +124,7 @@ class ProfilePage(BasePage):
     def exit_profile(self):
         with allure.step("Выйти из профиля пользователя"):
             self.find_element(profile_page_locators.exit_profile).click()
-            # sleep(5)
+            self.is_not_element_present(profile_page_locators.exit_profile)
 
     def change_patronymic(self):
         with allure.step("Изменить имя пользователя"):
@@ -139,7 +135,7 @@ class ProfilePage(BasePage):
             return rand_string
 
     def get_patronymic(self):
-        with allure.step("Получить фамилию пользователя"):
+        with allure.step("Получить отчество пользователя"):
             return self.find_element(profile_page_locators.my_patronymic_input).get_attribute('value')
 
     def change_email(self):
@@ -159,7 +155,7 @@ class ProfilePage(BasePage):
             return rand_string
 
     def get_email(self):
-        with allure.step("Получить фамилию пользователя"):
+        with allure.step("Получить Дату рождения пользователя"):
             return self.find_element(profile_page_locators.my_email).get_attribute('value')
 
     def change_date_of_birth(self):
@@ -216,7 +212,7 @@ class ProfilePage(BasePage):
                    "Ошибка 'Месяц введен некорректный' не отображается"
 
     def check_for_error_name_with_number_incorrect_data(self):
-        with allure.step("Проверить, что сообщение 'Разрешены только буквы, дефисы и пробелы'"):
+        with allure.step("Проверить, что сообщение 'Разрешены только буквы, дефисы и пробелы' отображается"):
             assert self.find_element(profile_page_locators.error_date_of_birth).text == \
                    "Разрешены только буквы, дефисы и пробелы", \
                    "Ошибка 'Разрешены только буквы, дефисы и пробелы' не отображается"
@@ -258,7 +254,6 @@ class ProfilePage(BasePage):
     def should_be_empty_in_favorites(self):
         with allure.step("Проверить что нет товаров в избранном"):
             try:
-                print(self.find_element(profile_page_locators.no_items_in_favorites).text)
                 assert "Ваш список пока пуст" in \
                        self.find_element(profile_page_locators.no_items_in_favorites).text
             except NoSuchElementException:
@@ -267,6 +262,28 @@ class ProfilePage(BasePage):
                 return False
             return True
 
-    # def should_be_open_personal_page(self):
-    #     assert self.is_element_visible(profile_page_locators.profile_menu), \
-    #         "Страница личного кабинета пользователя не открылась"
+    def should_be_empty_in_orders(self):
+        with allure.step("Проверить что во вкладке 'Заказы' нет заказов"):
+            try:
+                assert "У Вас пока нет заказов" in \
+                       self.find_element(profile_page_locators.you_do_not_have_orders_yet).text
+            except NoSuchElementException:
+                return False
+            except AssertionError:
+                return False
+            return True
+
+    def should_be_orders_in_orders(self):
+        with allure.step("Проверить что во вкладке 'Заказы' есть заказы"):
+            try:
+                assert "Заказ №: 9017421" in \
+                       self.find_element(profile_page_locators.order_item_id).text
+            except NoSuchElementException:
+                return False
+            except AssertionError:
+                return False
+            return True
+
+    def go_to_done_orders_tab(self):
+        with allure.step("Перейти на вкладку 'Выполненные'"):
+            self.is_element_visible(profile_page_locators.done_orders_tab).click()

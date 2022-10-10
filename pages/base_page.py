@@ -1,5 +1,3 @@
-from time import sleep
-
 import allure
 from selenium.common import TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -7,7 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-from ..pages.locators import home_page_locators
 from ..pages.locators import base_page_locators
 
 
