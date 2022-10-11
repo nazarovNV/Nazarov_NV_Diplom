@@ -6,5 +6,5 @@
 4. Тесты запускаются коммандой pytest -v --alluredir=reports
 но если необходимо ускорить прохождение тестов, то можно выполнить 2 последовательные комманды:
 pytest -s -v -n=2 -m  "multiple_CPUs_run" --alluredir=reports
-pytest -s -v -n=2 -m  "non_multiple_CPUs_run" --alluredir=reports
+pytest -m  "non_multiple_CPUs_run" --alluredir=reports
 5. Посмотреть аллюр репорт allure serve reports 
