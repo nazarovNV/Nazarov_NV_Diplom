@@ -1,6 +1,9 @@
+from time import sleep
+
 import pytest
 
 from pages.cart_page import CartPage
+from pages.feedback_page import FeedbackPage
 from pages.home_page import HomePage
 from pages.profile_page import ProfilePage
 import allure
@@ -674,7 +677,6 @@ def test_big_banners_carousel(driver):
     home_page.check_if_first_banner_is_visible()
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Проверка работы каруселей банеров и товаров")
 @allure.title("Проверка работы карусели товаров и их отображения")
 def test_items_carousel(driver):
@@ -714,3 +716,34 @@ def test_has_orders(driver):
     profile_page = ProfilePage(driver)
     profile_page.go_to_done_orders_tab()
     assert profile_page.should_be_orders_in_orders()
+
+
+@pytest.mark.NOTWORKING
+@allure.suite("Заполнение формы обратной связи")
+@allure.title("Загрузка png")
+def test_link_feedback(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+
+    home_page.click_feedback_link()
+    # home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/feedback/")
+
+    feedback_page = FeedbackPage(driver)
+    feedback_page.fill_name_input()
+    feedback_page.fill_number_input()
+    feedback_page.fill_email_input()
+    feedback_page.fill_order_number_input()
+    feedback_page.click_pharmacy_button()
+    feedback_page.click_any_pharmacy_button()
+    feedback_page.fill_text_of_the_appeal_input()
+    feedback_page.upload_file()
+    feedback_page.click_get_answer_email_radiobutton()
+    feedback_page.click_approval_checkbox()
+
+    feedback_page.click_submit_button()
+    feedback_page.check_is_there_thank_you_for_contacting_us_text()
+    sleep(5)
+
+    feedback_page.go_to_main_page()
+    sleep(5)
