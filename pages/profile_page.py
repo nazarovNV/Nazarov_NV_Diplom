@@ -6,9 +6,9 @@ import allure
 from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
 
-from ..pages.locators import home_page_locators
-from ..pages.base_page import BasePage
-from ..pages.locators import profile_page_locators
+from pages.locators import home_page_locators
+from pages.base_page import BasePage
+from pages.locators import profile_page_locators
 from faker import Faker
 
 

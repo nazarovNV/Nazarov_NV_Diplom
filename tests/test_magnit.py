@@ -1,11 +1,12 @@
 import pytest
 
-from ..pages.cart_page import CartPage
-from ..pages.home_page import HomePage
-from ..pages.profile_page import ProfilePage
+from pages.cart_page import CartPage
+from pages.home_page import HomePage
+from pages.profile_page import ProfilePage
 import allure
 
 
+@pytest.mark.presentation
 @pytest.mark.non_multiple_CPUs_run
 @allure.suite("Авторизация")
 @allure.title("Авторизация с валидными данными")
@@ -20,7 +21,7 @@ def test_login(driver):
     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Авторизация")
 @allure.title("Авторизация с валидными данными через почту")
 def test_login_email(driver):
@@ -36,6 +37,7 @@ def test_login_email(driver):
     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
 
 
+@pytest.mark.presentation
 @allure.suite("Авторизация")
 @allure.title("Авторизация с невалидными данными")
 def test_login_wrong_password(driver):
@@ -48,7 +50,7 @@ def test_login_wrong_password(driver):
     assert home_page.check_for_error_message(), "Нет сообщения о неверном пароле"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Имя на иконке пользователя на главной странице меняется если изменить имя")
 def test_change_name_at_profile_icon(driver):
@@ -69,7 +71,7 @@ def test_change_name_at_profile_icon(driver):
     assert home_page.get_user_name() == new_name, "Имя не изменилось"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение имени пользователя и проверка имени после повторной авторизации")
 def test_change_name(driver):
@@ -98,7 +100,7 @@ def test_change_name(driver):
     assert profile_page.get_name() == new_name, "Имя не изменилось"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение фамилии пользователя и проверка фамилии после повторной авторизации")
 def test_change_second_name(driver):
@@ -130,7 +132,7 @@ def test_change_second_name(driver):
     assert profile_page.get_second_name() == new_second_name, "Фамилия не изменилась"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение отчества пользователя и проверка отчества после повторной авторизации")
 def test_change_patronymic(driver):
@@ -162,7 +164,6 @@ def test_change_patronymic(driver):
     assert profile_page.get_patronymic() == new_patronymic, "Отчество не изменилось"
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение почты пользователя и проверка почты после повторной авторизации")
 def test_change_email(driver):
@@ -194,7 +195,7 @@ def test_change_email(driver):
     assert profile_page.get_email() == new_email, "Почта не изменилась"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение даты рождения пользователя и проверка даты рождения после повторной авторизации")
 def test_change_date_of_birth(driver):
@@ -226,7 +227,6 @@ def test_change_date_of_birth(driver):
     assert profile_page.get_date_of_birth() == new_date_of_birth, "Дата рождения не изменилась"
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Изменение пола пользователя и проверка пола после повторной авторизации")
 def test_change_gender(driver):
@@ -259,7 +259,7 @@ def test_change_gender(driver):
     assert profile_page.get_gender() != old_gender, "Пол не изменился"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что нельзя поставить дату несовершеннолетнего пользователя")
 def test_error_date_of_birth_minor_user(driver):
@@ -276,7 +276,7 @@ def test_error_date_of_birth_minor_user(driver):
     profile_page.check_for_error_date_of_birth_minor_user()
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что нельзя поставить некорректную дату")
 def test_date_of_birth_incorrect_data(driver):
@@ -294,7 +294,7 @@ def test_date_of_birth_incorrect_data(driver):
     profile_page.check_for_error_date_of_birth_incorrect_data()
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что нельзя ввести в поле 'имя' цифры")
 def test_name_incorrect_data(driver):
@@ -311,7 +311,6 @@ def test_name_incorrect_data(driver):
     profile_page.check_for_error_name_with_number_incorrect_data()
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что если в поле 'Фамилия' есть недопустимые символы, то данные не сохранятся")
 def test_change_second_name_incorrect_data(driver):
@@ -331,7 +330,6 @@ def test_change_second_name_incorrect_data(driver):
     assert profile_page.get_second_name() != new_second_name, "В фамилии есть недопустимые символы"
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что если в поле 'Отчество' есть недопустимые символы, то данные не сохранятся")
 def test_change_patronymic_incorrect_data(driver):
@@ -351,7 +349,6 @@ def test_change_patronymic_incorrect_data(driver):
     assert profile_page.get_patronymic() != new_patronymic, "В отчество есть недопустимые символы"
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что если оставить поле 'Отчество' пустым, то данные сохранятся")
 def test_change_patronymic_empty_field(driver):
@@ -371,7 +368,6 @@ def test_change_patronymic_empty_field(driver):
     assert profile_page.get_patronymic() == new_patronymic, "Отчество заполнено"
 
 
-@pytest.mark.non_multiple_CPUs_run
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что если оставить поле 'Фамилия' пустым, то данные сохранятся")
 def test_change_second_name_empty_field(driver):
@@ -391,7 +387,7 @@ def test_change_second_name_empty_field(driver):
     assert profile_page.get_second_name() == new_second_name, "Фамилия заполнено"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка того, что нельзя ввести в поле почта значение без '@mail.ru'")
 def test_change_email_wrong_data(driver):
@@ -408,7 +404,7 @@ def test_change_email_wrong_data(driver):
     profile_page.check_for_error_email_wrong_data()
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Изменение данных пользователя")
 @allure.title("Проверка возможности авторизоваться после смены пароля")
 def test_change_password(driver, change_pass_back):
@@ -436,7 +432,7 @@ def test_change_password(driver, change_pass_back):
     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Добавление товаров в избранное и в корзину")
 @allure.title("Добавление товара в корзину(не авторизованный пользователь)")
 def test_add_item(driver):
@@ -452,7 +448,7 @@ def test_add_item(driver):
     cart_page.check_item_is_in_cart(item_that_was_added, item_that_is_in_cart)
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Добавление товаров в избранное и в корзину")
 @allure.title("Удаление товара из корзины(не авторизованный пользователь)")
 def test_delete_item_from_cart_no_auth(driver):
@@ -467,7 +463,7 @@ def test_delete_item_from_cart_no_auth(driver):
     cart_page.should_be_empty_cart()
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Добавление товаров в избранное и в корзину")
 @allure.title("Удаление товара из корзины(авторизованный пользователь)")
 def test_delete_item_from_cart_auth(driver):
@@ -490,7 +486,7 @@ def test_delete_item_from_cart_auth(driver):
     cart_page.should_be_empty_cart()
 
 
-@pytest.mark.non_multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Добавление товаров в избранное и в корзину")
 @allure.title("Добавление товара в избранное")
 def test_delete_item_from_favorites(driver):
@@ -521,7 +517,6 @@ def test_delete_item_from_favorites(driver):
     assert profile_page.should_be_empty_in_favorites(), "В избранном есть товары"
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Информация о компании'")
 def test_link_company_info(driver):
@@ -533,7 +528,6 @@ def test_link_company_info(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/about-magnit/")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Контакты'")
 def test_link_contacts(driver):
@@ -545,7 +539,6 @@ def test_link_contacts(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/contacts/")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Обратная связь'")
 def test_link_feedback(driver):
@@ -557,7 +550,6 @@ def test_link_feedback(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/feedback/")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Как сделать заказ'")
 def test_link_how_to_order(driver):
@@ -569,7 +561,6 @@ def test_link_how_to_order(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/how_to_order")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Как сделать заказ'")
 def test_link_payment(driver):
@@ -581,7 +572,6 @@ def test_link_payment(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/payment")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Возврат товара'")
 def test_link_return(driver):
@@ -593,7 +583,6 @@ def test_link_return(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/return")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Правила применения скидок'")
 def test_link_promo_rules(driver):
@@ -605,7 +594,6 @@ def test_link_promo_rules(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/promo-rules")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Порядок отпуска лекарственных средств'")
 def test_link_medication_release(driver):
@@ -617,7 +605,6 @@ def test_link_medication_release(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/medication_release")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Политика обработки персональных данных'")
 def test_link_politics_personal_data(driver):
@@ -629,7 +616,6 @@ def test_link_politics_personal_data(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/politics_personal_data")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Пользовательское соглашение'")
 def test_link_terms_of_use(driver):
@@ -641,7 +627,6 @@ def test_link_terms_of_use(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/terms_of_use/")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Работа ссылок")
 @allure.title("Проверка работы ссылки 'Правовая информация'")
 def test_link_legal_information(driver):
@@ -653,7 +638,6 @@ def test_link_legal_information(driver):
     home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/legal_information/")
 
 
-@pytest.mark.multiple_CPUs_run
 @allure.suite("Проверка работы каруселей банеров и товаров")
 @allure.title("Проверка наличия 5 баннеров")
 def test_should_be_5_banners(driver):
@@ -663,7 +647,7 @@ def test_should_be_5_banners(driver):
     home_page.check_number_of_big_banners_eq_5()
 
 
-@pytest.mark.multiple_CPUs_run
+@pytest.mark.presentation
 @allure.suite("Проверка работы каруселей банеров и товаров")
 @allure.title("Проверка работы карусели больших банеров и их отображения")
 def test_big_banners_carousel(driver):

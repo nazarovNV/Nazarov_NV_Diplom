@@ -1,6 +1,6 @@
 from selenium.common import NoSuchElementException
-from ..pages.base_page import BasePage
-from ..pages.locators import home_page_locators
+from pages.base_page import BasePage
+from pages.locators import home_page_locators
 import allure
 
 

@@ -8,9 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pytest
 
-from .pages.home_page import HomePage
-from .pages.profile_page import ProfilePage
-from .pages.locators import profile_page_locators
+
 
 
 @pytest.fixture(scope='function')

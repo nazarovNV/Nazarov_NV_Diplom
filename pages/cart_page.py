@@ -1,9 +1,9 @@
 import allure
 from selenium.common import NoSuchElementException
 
-from ..pages.base_page import BasePage
+from pages.base_page import BasePage
 
-from ..pages.locators import cart_page_locators
+from pages.locators import cart_page_locators
 
 
 class CartPage(BasePage):
