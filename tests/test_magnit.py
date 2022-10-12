@@ -702,7 +702,7 @@ def test_no_orders(driver):
     assert profile_page.should_be_empty_in_orders()
 
 
-@pytest.mark.NOTWORKING
+
 @allure.suite("Вкладка 'мои заказы'")
 @allure.title("Проверка отображения вкладки 'мои заказы', если у пользователя есть заказы")
 def test_has_orders(driver):
