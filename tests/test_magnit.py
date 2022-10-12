@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 
 from pages.cart_page import CartPage
@@ -435,7 +433,6 @@ def test_change_password(driver, change_pass_back):
     assert profile_page.check_for_my_orders_tab_on_page(), "Вы не авторизовались"
 
 
-@pytest.mark.presentation
 @allure.suite("Добавление товаров в избранное и в корзину")
 @allure.title("Добавление товара в корзину(не авторизованный пользователь)")
 def test_add_item(driver):

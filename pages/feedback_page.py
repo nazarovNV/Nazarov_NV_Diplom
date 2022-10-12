@@ -1,14 +1,8 @@
-import string
-import random
-import datetime
-from time import sleep
 import allure
 from selenium.common import NoSuchElementException
-from selenium.webdriver import Keys
 
 from pages.locators import feedback_page_locators
 from pages.base_page import BasePage
-from faker import Faker
 
 
 class FeedbackPage(BasePage):
