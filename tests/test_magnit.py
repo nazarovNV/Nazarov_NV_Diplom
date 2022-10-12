@@ -702,6 +702,7 @@ def test_no_orders(driver):
     assert profile_page.should_be_empty_in_orders()
 
 
+@pytest.mark.NOTWORKING
 @allure.suite("Вкладка 'мои заказы'")
 @allure.title("Проверка отображения вкладки 'мои заказы', если у пользователя есть заказы")
 def test_has_orders(driver):
@@ -718,16 +719,15 @@ def test_has_orders(driver):
     assert profile_page.should_be_orders_in_orders()
 
 
-@pytest.mark.NOTWORKING
+
 @allure.suite("Заполнение формы обратной связи")
 @allure.title("Загрузка png")
-def test_link_feedback(driver):
+def test_feedback_png(driver):
     home_page = HomePage(driver)
     home_page.open()
     home_page.confirm_address()
 
     home_page.click_feedback_link()
-    # home_page.check_for_url_is_changed(home_page.get_current_url(), "https://apteka.magnit.ru/feedback/")
 
     feedback_page = FeedbackPage(driver)
     feedback_page.fill_name_input()
@@ -740,10 +740,6 @@ def test_link_feedback(driver):
     feedback_page.upload_file()
     feedback_page.click_get_answer_email_radiobutton()
     feedback_page.click_approval_checkbox()
-
     feedback_page.click_submit_button()
     feedback_page.check_is_there_thank_you_for_contacting_us_text()
-    sleep(5)
-
     feedback_page.go_to_main_page()
-    sleep(5)
