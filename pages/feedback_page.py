@@ -44,9 +44,21 @@ class FeedbackPage(BasePage):
         with allure.step("Заполнить поле 'Текст обращения'"):
             self.find_element(feedback_page_locators.the_text_of_the_appeal_input).send_keys("Текст обращения тест")
 
-    def upload_file(self):
+    def upload_file_png(self):
         with allure.step("Прикрепить png файл"):
             self.find_element(feedback_page_locators.upload_button).send_keys(r"D:\png_test.png")
+
+    def upload_file_jpg(self):
+        with allure.step("Прикрепить jpg файл"):
+            self.find_element(feedback_page_locators.upload_button).send_keys(r"D:\jpg_test.jpg")
+
+    def upload_file_pdf(self):
+        with allure.step("Прикрепить pdf файл"):
+            self.find_element(feedback_page_locators.upload_button).send_keys(r"D:\pdf_test.pdf")
+
+    def upload_file_jpeg(self):
+        with allure.step("Прикрепить jpeg файл"):
+            self.find_element(feedback_page_locators.upload_button).send_keys(r"D:\jpeg_test.jpeg")
 
     def click_get_answer_email_radiobutton(self):
         with allure.step("Выбрать 'Я хочу получить ответ по электронной почте'"):

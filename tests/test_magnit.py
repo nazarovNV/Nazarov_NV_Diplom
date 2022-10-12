@@ -736,7 +736,84 @@ def test_feedback_png(driver):
     feedback_page.click_pharmacy_button()
     feedback_page.click_any_pharmacy_button()
     feedback_page.fill_text_of_the_appeal_input()
-    feedback_page.upload_file()
+    feedback_page.upload_file_png()
+    feedback_page.click_get_answer_email_radiobutton()
+    feedback_page.click_approval_checkbox()
+    feedback_page.click_submit_button()
+    feedback_page.check_is_there_thank_you_for_contacting_us_text()
+    feedback_page.go_to_main_page()
+
+
+@allure.suite("Заполнение формы обратной связи")
+@allure.title("Загрузка jpg")
+def test_feedback_jpg(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+
+    home_page.click_feedback_link()
+
+    feedback_page = FeedbackPage(driver)
+    feedback_page.fill_name_input()
+    feedback_page.fill_number_input()
+    feedback_page.fill_email_input()
+    feedback_page.fill_order_number_input()
+    feedback_page.click_pharmacy_button()
+    feedback_page.click_any_pharmacy_button()
+    feedback_page.fill_text_of_the_appeal_input()
+    feedback_page.upload_file_jpg()
+    feedback_page.click_get_answer_email_radiobutton()
+    feedback_page.click_approval_checkbox()
+    feedback_page.click_submit_button()
+    feedback_page.check_is_there_thank_you_for_contacting_us_text()
+    feedback_page.go_to_main_page()
+
+
+@allure.suite("Заполнение формы обратной связи")
+@allure.title("Загрузка pdf")
+def test_feedback_pdf(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+
+    home_page.click_feedback_link()
+
+    feedback_page = FeedbackPage(driver)
+    feedback_page.fill_name_input()
+    feedback_page.fill_number_input()
+    feedback_page.fill_email_input()
+    feedback_page.fill_order_number_input()
+    feedback_page.click_pharmacy_button()
+    feedback_page.click_any_pharmacy_button()
+    feedback_page.fill_text_of_the_appeal_input()
+    feedback_page.upload_file_pdf()
+    feedback_page.click_get_answer_email_radiobutton()
+    feedback_page.click_approval_checkbox()
+    feedback_page.click_submit_button()
+    feedback_page.check_is_there_thank_you_for_contacting_us_text()
+    feedback_page.go_to_main_page()
+
+
+@allure.suite("Заполнение формы обратной связи")
+@allure.title("Загрузка jpeg")
+def test_feedback_jpeg(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    home_page.confirm_address()
+
+    home_page.click_feedback_link()
+
+    feedback_page = FeedbackPage(driver)
+    feedback_page.fill_name_input()
+    feedback_page.fill_number_input()
+    feedback_page.fill_email_input()
+    feedback_page.fill_order_number_input()
+    feedback_page.click_pharmacy_button()
+    feedback_page.click_any_pharmacy_button()
+    feedback_page.fill_text_of_the_appeal_input()
+
+    feedback_page.upload_file_jpeg()
+
     feedback_page.click_get_answer_email_radiobutton()
     feedback_page.click_approval_checkbox()
     feedback_page.click_submit_button()
