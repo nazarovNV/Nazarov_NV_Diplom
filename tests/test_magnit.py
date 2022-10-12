@@ -736,7 +736,9 @@ def test_feedback_png(driver):
     feedback_page.click_pharmacy_button()
     feedback_page.click_any_pharmacy_button()
     feedback_page.fill_text_of_the_appeal_input()
+
     feedback_page.upload_file_png()
+
     feedback_page.click_get_answer_email_radiobutton()
     feedback_page.click_approval_checkbox()
     feedback_page.click_submit_button()
@@ -761,7 +763,9 @@ def test_feedback_jpg(driver):
     feedback_page.click_pharmacy_button()
     feedback_page.click_any_pharmacy_button()
     feedback_page.fill_text_of_the_appeal_input()
+
     feedback_page.upload_file_jpg()
+
     feedback_page.click_get_answer_email_radiobutton()
     feedback_page.click_approval_checkbox()
     feedback_page.click_submit_button()
@@ -786,7 +790,9 @@ def test_feedback_pdf(driver):
     feedback_page.click_pharmacy_button()
     feedback_page.click_any_pharmacy_button()
     feedback_page.fill_text_of_the_appeal_input()
+
     feedback_page.upload_file_pdf()
+
     feedback_page.click_get_answer_email_radiobutton()
     feedback_page.click_approval_checkbox()
     feedback_page.click_submit_button()
