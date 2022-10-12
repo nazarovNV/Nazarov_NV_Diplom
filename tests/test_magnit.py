@@ -718,6 +718,7 @@ def test_has_orders(driver):
     assert profile_page.should_be_orders_in_orders()
 
 
+@pytest.mark.presentation
 @allure.suite("Заполнение формы обратной связи")
 @allure.title("Загрузка png")
 def test_feedback_png(driver):
