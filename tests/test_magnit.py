@@ -702,7 +702,6 @@ def test_no_orders(driver):
     assert profile_page.should_be_empty_in_orders()
 
 
-
 @allure.suite("Вкладка 'мои заказы'")
 @allure.title("Проверка отображения вкладки 'мои заказы', если у пользователя есть заказы")
 def test_has_orders(driver):
@@ -717,7 +716,6 @@ def test_has_orders(driver):
     profile_page = ProfilePage(driver)
     profile_page.go_to_done_orders_tab()
     assert profile_page.should_be_orders_in_orders()
-
 
 
 @allure.suite("Заполнение формы обратной связи")
