@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
 from pages.locators import base_page_locators
-
+# 12
 
 class BasePage:
     def __init__(self, driver: WebDriver):
